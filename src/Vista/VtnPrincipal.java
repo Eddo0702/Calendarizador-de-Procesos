@@ -16,6 +16,7 @@ import javax.swing.table.TableModel;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
 
 public class VtnPrincipal extends JFrame {
 
@@ -74,7 +75,19 @@ public class VtnPrincipal extends JFrame {
 		model.addRow(new Object[] { "P2", "5", "6", "7" });
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(10, 67, 322, 190);
+		scrollPane.setBounds(10, 67, 230, 190);
 		contentPane.add(scrollPane);
+		
+		JButton btnNewButton = new JButton("A\u00F1adir");
+		btnNewButton.setBounds(10, 268, 105, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Remover");
+		btnNewButton_1.setBounds(135, 268, 105, 23);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Actualizar resultados");
+		btnNewButton_2.setBounds(10, 302, 230, 23);
+		contentPane.add(btnNewButton_2);
 	}
 }
