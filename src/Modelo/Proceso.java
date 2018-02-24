@@ -9,49 +9,85 @@ package Modelo;
  *
  * @author eduar
  */
-public class Proceso {
-    
-    private int processID = 1;
-    private int arrivalTime = 0;
-    private int burstTime = 1;
-    private int waitingTime = 0;
-    private int turnAroundTime = 1;
 
-    public Proceso(int processID, int arrivalTime, int burstTime) {
-        this.processID = processID;
-        this.arrivalTime = arrivalTime;
-        this.burstTime = burstTime;
-    }
-    
+// Implementamos Comparable porque nos servira para ordenar los procesos segun
+// su tiempo de llegada
+public class Proceso implements Comparable<Proceso> {
 
-    public int getArrivalTime() {
-        return arrivalTime;
-    }
-    public void setArrivalTime(int arrivalTime) {
-        this.arrivalTime = arrivalTime;
-    }
+	private int processID = 1;
+	private int arrivalTime = 0;
+	private int burstTime = 1;
+	private int waitingTime = 0;
+	private int turnAroundTime = 1;
 
-    public int getBurstTime() {
-        return burstTime;
-    }
-    public void setBurstTime(int burstTime) {
-        this.burstTime = burstTime;
-    }
+	// ****************
 
-    public int getWaitingTime() {
-        return waitingTime;
-    }
-    public void setWaitingTime(int waitingTime) {
-        this.waitingTime = waitingTime;
-    }
+	private String nombre;
+	private int llegada;
+	private int rafaga;
+	private int prioridad;
 
-    public int getTurnAroundTime() {
-        return turnAroundTime;
-    }
-    public void setTurnAroundTime(int turnAroundTime) {
-        this.turnAroundTime = turnAroundTime;
-    }
-    
-    
-    
+	public Proceso(int id, int llegada, int rafaga, int prioridad) {
+		nombre = "P" + id;
+		this.llegada = llegada;
+		this.rafaga = rafaga;
+		this.prioridad = prioridad;
+	}
+
+	@Override
+	public int compareTo(Proceso p) {
+		if (llegada < p.llegada) {
+			return -1;
+		}
+		if (llegada > p.llegada) {
+			return 1;
+		}
+		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return nombre + " - " + llegada + " - " + rafaga + " - " + prioridad;
+	}
+
+	// ****************
+
+	public Proceso(int processID, int arrivalTime, int burstTime) {
+		this.processID = processID;
+		this.arrivalTime = arrivalTime;
+		this.burstTime = burstTime;
+	}
+
+	public int getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(int arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	public int getBurstTime() {
+		return burstTime;
+	}
+
+	public void setBurstTime(int burstTime) {
+		this.burstTime = burstTime;
+	}
+
+	public int getWaitingTime() {
+		return waitingTime;
+	}
+
+	public void setWaitingTime(int waitingTime) {
+		this.waitingTime = waitingTime;
+	}
+
+	public int getTurnAroundTime() {
+		return turnAroundTime;
+	}
+
+	public void setTurnAroundTime(int turnAroundTime) {
+		this.turnAroundTime = turnAroundTime;
+	}
+
 }
