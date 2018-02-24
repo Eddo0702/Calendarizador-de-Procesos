@@ -11,10 +11,10 @@ public class Test {
 		// TODO Auto-generated method stub
 		ArrayList<Proceso> procesos = new ArrayList<>();
 		procesos.add(new Proceso(3, 5, 7, 1));
-		procesos.add(new Proceso(1, 4, 5, 2));
-		procesos.add(new Proceso(4, 3, 3, 3));
-		procesos.add(new Proceso(2, 2, 4, 4));
-		procesos.add(new Proceso(5, 0, 9, 5));
+		procesos.add(new Proceso(1, 2, 5, 2));
+		procesos.add(new Proceso(4, 0, 3, 3));
+		procesos.add(new Proceso(2, 4, 4, 4));
+		procesos.add(new Proceso(5, 3, 9, 5));
 
 		System.out.println("Arreglo desordenado\n");
 		for (Proceso p : procesos) {
