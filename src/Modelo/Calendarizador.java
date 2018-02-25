@@ -27,37 +27,6 @@ public class Calendarizador {
 		return calendarizador;
 	}
 
-	private void inicializarAlgoritmo(ArrayList<Proceso> procesos) {
-		Collections.sort(procesos);
-		
-		//Calculamos el tiempo total
-		totalTime = 0;
-		for (Proceso p : procesos) {
-			totalTime += p.getRafaga();
-		}
-		
-		arrivalTime = procesos.get(0).getLlegada();
-	}
-
-	private void actualizarColaTrabajo() {
-		for (Proceso p : colaTrabajo) {
-			p.Update();
-		}
-	}
-
-	private void removeCurrentProcess() {
-		procesosFinalizados.add(colaTrabajo.elementAt(0));
-		colaTrabajo.removeElementAt(0);
-	}
-
-	private void removeFinishedProcess() {
-		if (colaTrabajo.elementAt(0).getRafaga() == 0) {
-			removeCurrentProcess();
-			Collections.sort(colaTrabajo);
-		}
-		colaTrabajo.elementAt(0).setEstado(true);
-	}
-
 	public ArrayList<Proceso> FIFO(ArrayList<Proceso> procesos) {
 		inicializarAlgoritmo(procesos);
 
@@ -158,5 +127,36 @@ public class Calendarizador {
 		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
 		removeCurrentProcess();
 		return procesosFinalizados;
+	}
+	
+	private void inicializarAlgoritmo(ArrayList<Proceso> procesos) {
+		Collections.sort(procesos);
+		
+		//Calculamos el tiempo total
+		totalTime = 0;
+		for (Proceso p : procesos) {
+			totalTime += p.getRafaga();
+		}
+		
+		arrivalTime = procesos.get(0).getLlegada();
+	}
+
+	private void actualizarColaTrabajo() {
+		for (Proceso p : colaTrabajo) {
+			p.Update();
+		}
+	}
+
+	private void removeCurrentProcess() {
+		procesosFinalizados.add(colaTrabajo.elementAt(0));
+		colaTrabajo.removeElementAt(0);
+	}
+
+	private void removeFinishedProcess() {
+		if (colaTrabajo.elementAt(0).getRafaga() == 0) {
+			removeCurrentProcess();
+			Collections.sort(colaTrabajo);
+		}
+		colaTrabajo.elementAt(0).setEstado(true);
 	}
 }
