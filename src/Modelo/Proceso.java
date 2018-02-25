@@ -20,6 +20,7 @@ public class Proceso implements Comparable<Proceso> {
 	private int prioridad;
 	private int tiempoEspera;
 	private boolean isRunning = false;
+	private int orderBy = 0;
 
 	public Proceso(int id, int llegada, int rafaga, int prioridad) {
 		nombre = "P" + id;
@@ -39,6 +40,10 @@ public class Proceso implements Comparable<Proceso> {
 	public void setEstado(boolean active) {
 		isRunning = active;
 	}
+	
+	public void setOrderBy(int option) {
+		orderBy = option;
+	}
 
 	public int getRafaga() {
 		return rafaga;
@@ -50,11 +55,31 @@ public class Proceso implements Comparable<Proceso> {
 
 	@Override
 	public int compareTo(Proceso p) {
-		if (llegada < p.llegada) {
-			return -1;
-		}
-		if (llegada > p.llegada) {
-			return 1;
+		switch (orderBy) {
+		case 0:
+			if (llegada < p.llegada) {
+				return -1;
+			}
+			if (llegada > p.llegada) {
+				return 1;
+			}
+			break;
+		case 1:
+			if (rafaga < p.rafaga) {
+				return -1;
+			}
+			if (rafaga > p.rafaga) {
+				return 1;
+			}
+			break;
+		case 2:
+			if (prioridad < p.prioridad) {
+				return -1;
+			}
+			if (prioridad > p.prioridad) {
+				return 1;
+			}
+			break;
 		}
 		return 0;
 	}
