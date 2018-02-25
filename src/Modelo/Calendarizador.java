@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 
 public class Calendarizador {
@@ -34,6 +35,7 @@ public class Calendarizador {
 	}
 
 	public ArrayList<Proceso> FIFO(ArrayList<Proceso> procesos) {
+		Collections.sort(procesos);
 		setTotalTime(procesos);
 		arrivalTime = procesos.get(0).getLlegada();
 
