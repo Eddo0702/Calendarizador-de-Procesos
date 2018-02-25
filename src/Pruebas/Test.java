@@ -30,8 +30,9 @@ public class Test {
 		Calendarizador calen = Calendarizador.getInstance();
 		ArrayList<Proceso> procesos2;
 		// procesos2 = calen.FIFO(procesos);
-		procesos2 = calen.SJF(procesos);
+		// procesos2 = calen.SJF(procesos);
 		// procesos2 = calen.Prioridad(procesos);
+		procesos2 = calen.SRTF(procesos);
 
 		System.out.println("\nArreglo resultante de algoritmo\n");
 		for (Proceso p : procesos2) {

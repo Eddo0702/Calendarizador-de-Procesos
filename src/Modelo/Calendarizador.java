@@ -3,6 +3,7 @@ package Modelo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Stack;
 import java.util.Vector;
 
 public class Calendarizador {
@@ -55,12 +56,12 @@ public class Calendarizador {
 
 			// Se sacan los procesos que han agotado su tiempo de rafaga
 			if (colaTrabajo.elementAt(0).getRafaga() == 0) {
-				removeProcess();
+				removeCurrentProcess();
 			}
 			colaTrabajo.elementAt(0).setEstado(true);
 		}
 		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
-		removeProcess();
+		removeCurrentProcess();
 		return procesosFinalizados;
 	}
 
@@ -80,22 +81,62 @@ public class Calendarizador {
 				if (p.getLlegada() == i) {
 					p.setOrderBy(1);
 					colaTrabajo.add(p);
-					//Collections.sort(colaTrabajo);
 				}
 			}
 
 			// Se sacan los procesos que han agotado su tiempo de rafaga
 			if (colaTrabajo.elementAt(0).getRafaga() == 0) {
-				removeProcess();
+				removeCurrentProcess();
 				Collections.sort(colaTrabajo);
 			}
 			colaTrabajo.elementAt(0).setEstado(true);
 		}
 		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
-		removeProcess();
+		removeCurrentProcess();
 		return procesosFinalizados;
 	}
-	
+
+	public ArrayList<Proceso> SRTF(ArrayList<Proceso> procesos) {
+		Collections.sort(procesos);
+		setTotalTime(procesos);
+		arrivalTime = procesos.get(0).getLlegada();
+
+		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
+			for (Proceso p : colaTrabajo) {
+				p.Update();
+			}
+
+			// Aqui se añaden nuevos procesos a la cola de trabajo segun su tiempo de
+			// llegada
+			for (Proceso p : procesos) {
+				if (p.getLlegada() == i) {
+					p.setOrderBy(1);
+					if (!colaTrabajo.isEmpty()) {
+						if (colaTrabajo.elementAt(0).getRafaga() > p.getRafaga()) {
+							colaTrabajo.elementAt(0).setEstado(false);
+							procesosFinalizados.add(colaTrabajo.elementAt(0));
+							colaTrabajo.add(0, p);
+						} else {
+							colaTrabajo.add(p);
+						}
+					} else {
+						colaTrabajo.add(p);
+					}
+				}
+			}
+
+			// Se sacan los procesos que han agotado su tiempo de rafaga
+			if (colaTrabajo.elementAt(0).getRafaga() == 0) {
+				removeCurrentProcess();
+				Collections.sort(colaTrabajo);
+			}
+			colaTrabajo.elementAt(0).setEstado(true);
+		}
+		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
+		removeCurrentProcess();
+		return procesosFinalizados;
+	}
+
 	public ArrayList<Proceso> Prioridad(ArrayList<Proceso> procesos) {
 		Collections.sort(procesos);
 		setTotalTime(procesos);
@@ -112,23 +153,23 @@ public class Calendarizador {
 				if (p.getLlegada() == i) {
 					p.setOrderBy(2);
 					colaTrabajo.add(p);
-					//Collections.sort(colaTrabajo);
+					// Collections.sort(colaTrabajo);
 				}
 			}
 
 			// Se sacan los procesos que han agotado su tiempo de rafaga
 			if (colaTrabajo.elementAt(0).getRafaga() == 0) {
-				removeProcess();
+				removeCurrentProcess();
 				Collections.sort(colaTrabajo);
 			}
 			colaTrabajo.elementAt(0).setEstado(true);
 		}
 		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
-		removeProcess();
+		removeCurrentProcess();
 		return procesosFinalizados;
 	}
 
-	private void removeProcess() {
+	private void removeCurrentProcess() {
 		procesosFinalizados.add(colaTrabajo.elementAt(0));
 		colaTrabajo.removeElementAt(0);
 	}
