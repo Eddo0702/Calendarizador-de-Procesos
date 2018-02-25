@@ -27,17 +27,22 @@ public class Calendarizador {
 		return calendarizador;
 	}
 
-	private void setTotalTime(ArrayList<Proceso> procesos) {
+	private void inicializarAlgoritmo(ArrayList<Proceso> procesos) {
+		Collections.sort(procesos);
+		
+		//Calculamos el tiempo total
 		totalTime = 0;
 		for (Proceso p : procesos) {
 			totalTime += p.getRafaga();
 		}
+		
+		arrivalTime = procesos.get(0).getLlegada();
 	}
 
-	private void inicializarAlgoritmo(ArrayList<Proceso> procesos) {
-		Collections.sort(procesos);
-		setTotalTime(procesos);
-		arrivalTime = procesos.get(0).getLlegada();
+	private void actualizarColaTrabajo() {
+		for (Proceso p : colaTrabajo) {
+			p.Update();
+		}
 	}
 
 	private void removeCurrentProcess() {
@@ -45,13 +50,19 @@ public class Calendarizador {
 		colaTrabajo.removeElementAt(0);
 	}
 
+	private void removeFinishedProcess() {
+		if (colaTrabajo.elementAt(0).getRafaga() == 0) {
+			removeCurrentProcess();
+			Collections.sort(colaTrabajo);
+		}
+		colaTrabajo.elementAt(0).setEstado(true);
+	}
+
 	public ArrayList<Proceso> FIFO(ArrayList<Proceso> procesos) {
 		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
-			for (Proceso p : colaTrabajo) {
-				p.Update();
-			}
+			actualizarColaTrabajo();
 
 			// Aqui se añaden nuevos procesos a la cola de trabajo segun su tiempo de
 			// llegada
@@ -62,10 +73,7 @@ public class Calendarizador {
 			}
 
 			// Se sacan los procesos que han agotado su tiempo de rafaga
-			if (colaTrabajo.elementAt(0).getRafaga() == 0) {
-				removeCurrentProcess();
-			}
-			colaTrabajo.elementAt(0).setEstado(true);
+			removeFinishedProcess();
 		}
 		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
 		removeCurrentProcess();
@@ -76,9 +84,7 @@ public class Calendarizador {
 		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
-			for (Proceso p : colaTrabajo) {
-				p.Update();
-			}
+			actualizarColaTrabajo();
 
 			// Aqui se añaden nuevos procesos a la cola de trabajo segun su tiempo de
 			// llegada
@@ -90,11 +96,7 @@ public class Calendarizador {
 			}
 
 			// Se sacan los procesos que han agotado su tiempo de rafaga
-			if (colaTrabajo.elementAt(0).getRafaga() == 0) {
-				removeCurrentProcess();
-				Collections.sort(colaTrabajo);
-			}
-			colaTrabajo.elementAt(0).setEstado(true);
+			removeFinishedProcess();
 		}
 		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
 		removeCurrentProcess();
@@ -105,9 +107,7 @@ public class Calendarizador {
 		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
-			for (Proceso p : colaTrabajo) {
-				p.Update();
-			}
+			actualizarColaTrabajo();
 
 			// Aqui se añaden nuevos procesos a la cola de trabajo segun su tiempo de
 			// llegada
@@ -129,11 +129,7 @@ public class Calendarizador {
 			}
 
 			// Se sacan los procesos que han agotado su tiempo de rafaga
-			if (colaTrabajo.elementAt(0).getRafaga() == 0) {
-				removeCurrentProcess();
-				Collections.sort(colaTrabajo);
-			}
-			colaTrabajo.elementAt(0).setEstado(true);
+			removeFinishedProcess();
 		}
 		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
 		removeCurrentProcess();
@@ -144,9 +140,7 @@ public class Calendarizador {
 		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
-			for (Proceso p : colaTrabajo) {
-				p.Update();
-			}
+			actualizarColaTrabajo();
 
 			// Aqui se añaden nuevos procesos a la cola de trabajo segun su tiempo de
 			// llegada
@@ -159,11 +153,7 @@ public class Calendarizador {
 			}
 
 			// Se sacan los procesos que han agotado su tiempo de rafaga
-			if (colaTrabajo.elementAt(0).getRafaga() == 0) {
-				removeCurrentProcess();
-				Collections.sort(colaTrabajo);
-			}
-			colaTrabajo.elementAt(0).setEstado(true);
+			removeFinishedProcess();
 		}
 		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
 		removeCurrentProcess();
