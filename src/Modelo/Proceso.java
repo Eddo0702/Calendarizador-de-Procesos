@@ -26,12 +26,34 @@ public class Proceso implements Comparable<Proceso> {
 	private int llegada;
 	private int rafaga;
 	private int prioridad;
+	private int tiempoEspera;
+	private boolean isRunning = false;
 
 	public Proceso(int id, int llegada, int rafaga, int prioridad) {
 		nombre = "P" + id;
 		this.llegada = llegada;
 		this.rafaga = rafaga;
 		this.prioridad = prioridad;
+	}
+
+	public void Update() {
+		if (isRunning) {
+			rafaga--;
+		} else {
+			tiempoEspera++;
+		}
+	}
+
+	public void setEstado(boolean active) {
+		isRunning = active;
+	}
+
+	public int getRafaga() {
+		return rafaga;
+	}
+
+	public int getLlegada() {
+		return llegada;
 	}
 
 	@Override
@@ -47,7 +69,8 @@ public class Proceso implements Comparable<Proceso> {
 
 	@Override
 	public String toString() {
-		return nombre + " - " + llegada + " - " + rafaga + " - " + prioridad;
+		return "Proceso " + nombre + " Llegada: " + llegada + " Rafaga: " + rafaga + " Prioridad: " + prioridad
+				+ " TE: " + tiempoEspera;
 	}
 
 	// ****************

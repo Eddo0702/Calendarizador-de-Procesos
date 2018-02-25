@@ -3,6 +3,7 @@ package Pruebas;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import Modelo.Calendarizador;
 import Modelo.Proceso;
 
 public class Test {
@@ -25,6 +26,13 @@ public class Test {
 
 		System.out.println("\nArreglo ordenado\n");
 		for (Proceso p : procesos) {
+			System.out.println(p);
+		}
+
+		Calendarizador calen = Calendarizador.getInstance();
+		ArrayList<Proceso> procesos2 = calen.FIFO(procesos);
+		System.out.println("\nArreglo resultante de algoritmo\n");
+		for (Proceso p : procesos2) {
 			System.out.println(p);
 		}
 	}
