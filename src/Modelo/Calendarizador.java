@@ -34,10 +34,19 @@ public class Calendarizador {
 		}
 	}
 
-	public ArrayList<Proceso> FIFO(ArrayList<Proceso> procesos) {
+	private void inicializarAlgoritmo(ArrayList<Proceso> procesos) {
 		Collections.sort(procesos);
 		setTotalTime(procesos);
 		arrivalTime = procesos.get(0).getLlegada();
+	}
+
+	private void removeCurrentProcess() {
+		procesosFinalizados.add(colaTrabajo.elementAt(0));
+		colaTrabajo.removeElementAt(0);
+	}
+
+	public ArrayList<Proceso> FIFO(ArrayList<Proceso> procesos) {
+		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
 			for (Proceso p : colaTrabajo) {
@@ -64,9 +73,7 @@ public class Calendarizador {
 	}
 
 	public ArrayList<Proceso> SJF(ArrayList<Proceso> procesos) {
-		Collections.sort(procesos);
-		setTotalTime(procesos);
-		arrivalTime = procesos.get(0).getLlegada();
+		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
 			for (Proceso p : colaTrabajo) {
@@ -95,9 +102,7 @@ public class Calendarizador {
 	}
 
 	public ArrayList<Proceso> SRTF(ArrayList<Proceso> procesos) {
-		Collections.sort(procesos);
-		setTotalTime(procesos);
-		arrivalTime = procesos.get(0).getLlegada();
+		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
 			for (Proceso p : colaTrabajo) {
@@ -136,9 +141,7 @@ public class Calendarizador {
 	}
 
 	public ArrayList<Proceso> Prioridad(ArrayList<Proceso> procesos) {
-		Collections.sort(procesos);
-		setTotalTime(procesos);
-		arrivalTime = procesos.get(0).getLlegada();
+		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
 			for (Proceso p : colaTrabajo) {
@@ -166,10 +169,4 @@ public class Calendarizador {
 		removeCurrentProcess();
 		return procesosFinalizados;
 	}
-
-	private void removeCurrentProcess() {
-		procesosFinalizados.add(colaTrabajo.elementAt(0));
-		colaTrabajo.removeElementAt(0);
-	}
-
 }
