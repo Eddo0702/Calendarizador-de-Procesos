@@ -117,7 +117,6 @@ public class Calendarizador {
 				if (p.getLlegada() == i) {
 					p.setOrderBy(2);
 					colaTrabajo.add(p);
-					// Collections.sort(colaTrabajo);
 				}
 			}
 
