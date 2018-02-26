@@ -17,10 +17,14 @@ public class Test {
 		// procesos.add(new Proceso(2, 4, 4, 4));
 		// procesos.add(new Proceso(5, 3, 9, 5));
 
-		procesos.add(new Proceso(1, 0, 7, 1));
-		procesos.add(new Proceso(2, 2, 4, 2));
-		procesos.add(new Proceso(3, 4, 1, 3));
-		procesos.add(new Proceso(4, 5, 4, 4));
+		// procesos.add(new Proceso(1, 0, 7, 1));
+		// procesos.add(new Proceso(2, 2, 4, 2));
+		// procesos.add(new Proceso(3, 4, 1, 3));
+		// procesos.add(new Proceso(4, 5, 4, 4));
+
+		procesos.add(new Proceso(1, 1, 24, 1));
+		procesos.add(new Proceso(2, 2, 3, 2));
+		procesos.add(new Proceso(3, 3, 3, 3));
 
 		/*
 		 * procesos.add(new Proceso(1, 8, 14, 5)); procesos.add(new Proceso(2, 12, 22,

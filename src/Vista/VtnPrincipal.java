@@ -8,19 +8,32 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+
 import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import Controlador.Controller;
+
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.GrayFilter;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VtnPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -57,13 +70,16 @@ public class VtnPrincipal extends JFrame {
 		contentPane.add(lblSeleccionaElAlgoritmo);
 
 		JComboBox cbAlgoritmos = new JComboBox();
-		cbAlgoritmos.setBounds(10, 36, 183, 20);
+		cbAlgoritmos.setBounds(10, 36, 275, 20);
+		cbAlgoritmos.addItem("FIFO");
+		cbAlgoritmos.addItem("Short Job First");
 		cbAlgoritmos.addItem("Short Remaining Time First");
+		cbAlgoritmos.addItem("Por Prioridad");
 		cbAlgoritmos.addItem("Round Robin");
 		contentPane.add(cbAlgoritmos);
 
-		String[] names = { "Nombre", "Rafaga", "Llegada", "Quantum" };
-		Object[][] data = {};
+		String[] names = { "Nombre", "Rafaga", "Llegada", "Prioridad", "Quantum" };
+		// Object[][] data = {};
 
 		JTable table = new JTable();
 		table.setFillsViewportHeight(true);
@@ -71,23 +87,53 @@ public class VtnPrincipal extends JFrame {
 		model.setColumnIdentifiers(names);
 		table.setModel(model);
 
-		model.addRow(new Object[] { "P1", "2", "3", "4" });
-		model.addRow(new Object[] { "P2", "5", "6", "7" });
+		// model.addRow(new Object[] { "P1", "2", "3", "4" });
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(10, 67, 230, 190);
+		scrollPane.setBounds(10, 67, 275, 190);
 		contentPane.add(scrollPane);
-		
-		JButton btnNewButton = new JButton("A\u00F1adir");
-		btnNewButton.setBounds(10, 268, 105, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Remover");
-		btnNewButton_1.setBounds(135, 268, 105, 23);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Actualizar resultados");
-		btnNewButton_2.setBounds(10, 302, 230, 23);
-		contentPane.add(btnNewButton_2);
+
+		JButton btnAnadir = new JButton("A\u00F1adir");
+		btnAnadir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				new DialogNuevoProceso(model);
+			}
+		});
+		btnAnadir.setBounds(10, 268, 105, 23);
+		contentPane.add(btnAnadir);
+
+		JButton btnRemover = new JButton("Remover");
+		btnRemover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					model.removeRow(table.getSelectedRow());
+				} catch (Exception e) {
+				}
+			}
+		});
+		btnRemover.setBounds(180, 268, 105, 23);
+		contentPane.add(btnRemover);
+
+		JButton btnGenerar = new JButton("Generar resultados");
+		btnGenerar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Controller c = Controller.getInstance();
+				c.GenerarResultados(textArea, table, cbAlgoritmos.getSelectedIndex());
+			}
+		});
+		btnGenerar.setBounds(10, 302, 275, 23);
+		contentPane.add(btnGenerar);
+
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setBounds(317, 67, 367, 190);
+		contentPane.add(textArea);
+
+		JLabel lblResultados = new JLabel("Resultados");
+		lblResultados.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblResultados.setBounds(317, 37, 160, 14);
+		contentPane.add(lblResultados);
 	}
 }

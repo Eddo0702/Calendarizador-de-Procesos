@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Vector;
 
+import Controlador.Controller;
+
 public class Calendarizador {
+	
+	private Controller controller;
 
 	private static Calendarizador calendarizador;
 
@@ -107,47 +111,39 @@ public class Calendarizador {
 
 	// En construccion...
 	public ArrayList<Proceso> RoundRobin(ArrayList<Proceso> procesos, int quantum) {
-		inicializarAlgoritmo(procesos);
-		int counter = 0;
+		// inicializarAlgoritmo(procesos);
 
-		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
-			if (colaTrabajo.elementAt(0).getRafaga() == 0)
-				continue;
+		// Se añaden todos los procesos a la cola de trabajo
+		for (Proceso p : procesos) {
+			colaTrabajo.add(p);
+		}
 
-			actualizarColaTrabajo();
+		// Se procede a trabajar con los procesos
+		while (!colaTrabajo.isEmpty()) {
+			System.out.println("entre al while, quedan procesos " + colaTrabajo.size());
+			for (Proceso p : colaTrabajo) {
+				System.out.println("entre al primer for");
 
-			// Aqui se añaden nuevos procesos a la cola de trabajo segun su tiempo de
-			// llegada
-			for (Proceso p : procesos) {
-				if (p.getLlegada() == i) {
-					colaTrabajo.add(p);
+				for (int j = 0; j < quantum; j++) {
+					p.setEstado(true);
+					System.out.println("entre al segundo for");
+					actualizarColaTrabajo();
+					// Se sacan los procesos que han agotado su tiempo de rafaga
+					if (p.getRafaga() == 0) {
+						System.out.println("fuera un proceso");
+						procesosFinalizados.add(p);
+						colaTrabajo.remove(p);
+						//continue;
+					}
+					p.setEstado(false);
 				}
+				System.out.println("sali del segundo for");
+
 			}
-
-			counter++;
-
-			if (counter == quantum) {
-				counter = 0;
-
-				colaTrabajo.elementAt(0).setEstado(false);
-				procesosFinalizados.add(colaTrabajo.elementAt(0));
-				colaTrabajo.add(colaTrabajo.elementAt(0));
-				colaTrabajo.removeElementAt(0);
-				// Collections.sort(colaTrabajo);
-			}
-
-			// Se sacan los procesos que han agotado su tiempo de rafaga
-			if (colaTrabajo.elementAt(0).getRafaga() == 0) {
-				removeCurrentProcess();
-				colaTrabajo.elementAt(0).setEstado(true);
-				// Collections.sort(colaTrabajo);
-				counter = 0;
-				continue;
-			}
-			colaTrabajo.elementAt(0).setEstado(true);
+			System.out.println("sali del primer for");
 		}
 		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
-		removeCurrentProcess();
+		// removeCurrentProcess();
 		return procesosFinalizados;
 	}
 

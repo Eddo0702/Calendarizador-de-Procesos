@@ -40,7 +40,7 @@ public class Proceso implements Comparable<Proceso> {
 	public void setEstado(boolean active) {
 		isRunning = active;
 	}
-	
+
 	public void setOrderBy(int option) {
 		orderBy = option;
 	}
