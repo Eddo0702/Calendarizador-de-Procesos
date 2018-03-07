@@ -128,12 +128,17 @@ public class VtnPrincipal extends JFrame {
 
 		textArea = new JTextArea();
 		textArea.setEditable(false);
-		textArea.setBounds(317, 67, 367, 190);
-		contentPane.add(textArea);
+		// textArea.setBounds(317, 170, 367, 190);
+		// contentPane.add(textArea);
 
 		JLabel lblResultados = new JLabel("Resultados");
 		lblResultados.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblResultados.setBounds(317, 37, 160, 14);
 		contentPane.add(lblResultados);
+
+		JScrollPane scrollPane_1 = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane_1.setBounds(317, 67, 367, 190);
+		contentPane.add(scrollPane_1);
 	}
 }

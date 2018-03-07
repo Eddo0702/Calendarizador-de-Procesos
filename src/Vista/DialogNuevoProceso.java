@@ -88,7 +88,7 @@ public class DialogNuevoProceso extends JDialog {
 									txtRafaga.getText(), txtPrioridad.getText(), txtQuantum.getText() });
 							dispose();
 						} catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "Los campos sólo deben contener valores númericos");
+							JOptionPane.showMessageDialog(null, "Los campos deben contener valores numericos");
 						}
 					}
 				});
