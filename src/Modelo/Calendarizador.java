@@ -7,8 +7,6 @@ import java.util.Vector;
 import Controlador.Controller;
 
 public class Calendarizador {
-	
-	private Controller controller;
 
 	private static Calendarizador calendarizador;
 
@@ -31,7 +29,7 @@ public class Calendarizador {
 		return calendarizador;
 	}
 
-	public ArrayList<Proceso> FIFO(ArrayList<Proceso> procesos) {
+	public ArrayList<Proceso> FIFO(ArrayList<Proceso> procesos) {		
 		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
@@ -53,7 +51,12 @@ public class Calendarizador {
 		return procesosFinalizados;
 	}
 
+	//SJF variante NO PREEMPTIVE (se tiene en cuenta la llegada)
 	public ArrayList<Proceso> SJF(ArrayList<Proceso> procesos) {
+		/*for (Proceso p : procesos) {
+			p.setOrderBy(1);
+		}*/
+		
 		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
@@ -133,7 +136,7 @@ public class Calendarizador {
 						System.out.println("fuera un proceso");
 						procesosFinalizados.add(p);
 						colaTrabajo.remove(p);
-						//continue;
+						// continue;
 					}
 					p.setEstado(false);
 				}
@@ -148,6 +151,9 @@ public class Calendarizador {
 	}
 
 	public ArrayList<Proceso> Prioridad(ArrayList<Proceso> procesos) {
+		for (Proceso p : procesos) {
+			p.setOrderBy(2);
+		}
 		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {

@@ -78,7 +78,7 @@ public class VtnPrincipal extends JFrame {
 		cbAlgoritmos.addItem("Round Robin");
 		contentPane.add(cbAlgoritmos);
 
-		String[] names = { "Nombre", "Rafaga", "Llegada", "Prioridad", "Quantum" };
+		String[] names = { "Nombre", "Llegada", "Rafaga", "Prioridad", "Quantum" };
 		// Object[][] data = {};
 
 		JTable table = new JTable();

@@ -23,15 +23,21 @@ public class Controller {
 		return controller;
 	}
 
+	private int castToNumber(Object object) {
+		return Integer.parseInt(object.toString());
+		//return (int) object;
+	}
+
 	public void GenerarResultados(JTextArea textArea, JTable table, int algoritmo) {
 		ArrayList<Proceso> procesos = new ArrayList<>();
 
-		//ERROR de casteo aqui!!! Por arreglar!*********
+		// ERROR de casteo aqui!!! Por arreglar!*********
 		for (int row = 0; row < table.getRowCount(); row++) {
-			for (int col = 0; col < table.getColumnCount(); col++) {
-				procesos.add(new Proceso((Integer) table.getValueAt(row, col), (Integer) table.getValueAt(row, col),
-						(Integer) table.getValueAt(row, col), (Integer) table.getValueAt(row, col)));
-			}
+			System.out.println(table.getValueAt(row, 0) + " " + table.getValueAt(row, 1) + " "
+					+ table.getValueAt(row, 2) + " " + table.getValueAt(row, 3) + " " + table.getValueAt(row, 4));
+			//
+			procesos.add(new Proceso(castToNumber(table.getValueAt(row, 0)), castToNumber(table.getValueAt(row, 1)),
+					castToNumber(table.getValueAt(row, 2)), castToNumber(table.getValueAt(row, 3))));
 		}
 
 		Calendarizador calen = Calendarizador.getInstance();
@@ -50,10 +56,13 @@ public class Controller {
 		case 3:
 			procesos2 = calen.Prioridad(procesos);
 			break;
+		default:
+			System.out.println("Llamada a default");
 		}
 
 		textArea.append("Arreglo resultante de algoritmo\n\n");
 		for (Proceso p : procesos2) {
+			System.out.println(p.toString() + "\n");
 			textArea.append(p.toString() + "\n");
 		}
 	}
