@@ -35,7 +35,6 @@ public class Controller {
 		textArea.setText("");
 		procesosIN = new ArrayList<>();
 
-		// ERROR de casteo aqui!!! Por arreglar!*********
 		for (int row = 0; row < table.getRowCount(); row++) {
 			System.out.println(table.getValueAt(row, 0) + " " + table.getValueAt(row, 1) + " "
 					+ table.getValueAt(row, 2) + " " + table.getValueAt(row, 3) + " " + table.getValueAt(row, 4));
