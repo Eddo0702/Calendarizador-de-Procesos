@@ -11,7 +11,7 @@ package Modelo;
  */
 
 // Implementamos Comparable porque nos servira para ordenar los procesos segun
-// su tiempo de llegada
+// su tiempo de llegada o algun otro atributo que necesitemos
 public class Proceso implements Comparable<Proceso> {
 
 	private String nombre;
