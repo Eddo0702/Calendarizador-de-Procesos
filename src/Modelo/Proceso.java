@@ -87,6 +87,6 @@ public class Proceso implements Comparable<Proceso> {
 	@Override
 	public String toString() {
 		return "Proceso: " + nombre + " Llegada: " + llegada + " Prioridad: " + prioridad + " TE: "
-				+ (tiempoEspera - llegada);
+				+ tiempoEspera;
 	}
 }

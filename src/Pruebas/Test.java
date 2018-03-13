@@ -24,17 +24,23 @@ public class Test {
 		// procesos.add(new Proceso(4, 5, 4, 4));
 
 		// Prioridad
-		procesos.add(new Proceso(1, 0, 10, 3));
-		procesos.add(new Proceso(2, 0, 1, 1));
-		procesos.add(new Proceso(3, 0, 2, 4));
-		procesos.add(new Proceso(4, 0, 1, 5));
-		procesos.add(new Proceso(5, 0, 5, 2));
+		// procesos.add(new Proceso(1, 0, 10, 3));
+		// procesos.add(new Proceso(2, 0, 1, 1));
+		// procesos.add(new Proceso(3, 0, 2, 4));
+		// procesos.add(new Proceso(4, 0, 1, 5));
+		// procesos.add(new Proceso(5, 0, 5, 2));
 
 		// SJF NO PREEMPTIVE
 		// procesos.add(new Proceso(1, 0, 6, 1));
 		// procesos.add(new Proceso(2, 0, 8, 1));
 		// procesos.add(new Proceso(3, 0, 7, 1));
 		// procesos.add(new Proceso(4, 0, 3, 1));
+
+		// SRTF con procesos que salieron en el Parcial 1
+		procesos.add(new Proceso(1, 0, 13, 1));
+		procesos.add(new Proceso(2, 5, 7, 1));
+		procesos.add(new Proceso(3, 7, 4, 1));
+		procesos.add(new Proceso(4, 8, 7, 1));
 
 		/*
 		 * procesos.add(new Proceso(1, 8, 14, 5)); procesos.add(new Proceso(2, 12, 22,
@@ -53,8 +59,8 @@ public class Test {
 		ArrayList<Proceso> procesos2;
 		// procesos2 = calen.FIFO(procesos);
 		// procesos2 = calen.SJF(procesos);
-		procesos2 = calen.Prioridad(procesos);
-		// procesos2 = calen.SRTF(procesos);
+		// procesos2 = calen.Prioridad(procesos);
+		procesos2 = calen.SRTF(procesos);
 		// procesos2 = calen.RoundRobin(procesos, 3);
 
 		System.out.println("\nArreglo resultante de algoritmo\n");
