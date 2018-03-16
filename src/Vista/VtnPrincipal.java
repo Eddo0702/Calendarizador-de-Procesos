@@ -34,6 +34,8 @@ public class VtnPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JTextArea textArea;
+	
+	private Controller controller;
 
 	/**
 	 * Launch the application.
@@ -55,6 +57,8 @@ public class VtnPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VtnPrincipal() {
+		controller = Controller.getInstance();
+		
 		setResizable(false);
 		setTitle("Calendarizador de Procesos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,8 +123,7 @@ public class VtnPrincipal extends JFrame {
 		btnGenerar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Controller c = Controller.getInstance();
-				c.GenerarResultados(textArea, table, cbAlgoritmos.getSelectedIndex());
+				controller.GenerarResultados(textArea, table, cbAlgoritmos.getSelectedIndex());
 			}
 		});
 		btnGenerar.setBounds(10, 302, 275, 23);
