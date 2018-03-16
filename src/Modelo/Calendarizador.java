@@ -111,6 +111,32 @@ public class Calendarizador {
 		removeCurrentProcess();
 		return procesosFinalizados;
 	}
+	
+	public ArrayList<Proceso> Prioridad(ArrayList<Proceso> procesos) {
+		for (Proceso p : procesos) {
+			p.setOrderBy(2);
+		}
+		inicializarAlgoritmo(procesos);
+
+		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
+			actualizarColaTrabajo();
+
+			// Aqui se agregan nuevos procesos a la cola de trabajo segun su tiempo de
+			// llegada
+			for (Proceso p : procesos) {
+				if (p.getLlegada() == i) {
+					p.setOrderBy(2);
+					colaTrabajo.add(p);
+				}
+			}
+
+			// Se sacan los procesos que han agotado su tiempo de rafaga
+			removeFinishedProcess();
+		}
+		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
+		removeCurrentProcess();
+		return procesosFinalizados;
+	}
 
 	/************************** En construccion... ******************/
 	public ArrayList<Proceso> RoundRobin(ArrayList<Proceso> procesos, int quantum) {
@@ -147,32 +173,6 @@ public class Calendarizador {
 		}
 		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
 		// removeCurrentProcess();
-		return procesosFinalizados;
-	}
-
-	public ArrayList<Proceso> Prioridad(ArrayList<Proceso> procesos) {
-		for (Proceso p : procesos) {
-			p.setOrderBy(2);
-		}
-		inicializarAlgoritmo(procesos);
-
-		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
-			actualizarColaTrabajo();
-
-			// Aqui se agregan nuevos procesos a la cola de trabajo segun su tiempo de
-			// llegada
-			for (Proceso p : procesos) {
-				if (p.getLlegada() == i) {
-					p.setOrderBy(2);
-					colaTrabajo.add(p);
-				}
-			}
-
-			// Se sacan los procesos que han agotado su tiempo de rafaga
-			removeFinishedProcess();
-		}
-		// ultima llamada fuera del ciclo para asegurarnos de remover el ultimo proceso
-		removeCurrentProcess();
 		return procesosFinalizados;
 	}
 
