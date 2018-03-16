@@ -7,7 +7,7 @@ package Modelo;
 
 /**
  *
- * @author eduar
+ * @author Angel Leon
  */
 
 // Implementamos Comparable porque nos servira para ordenar los procesos segun
