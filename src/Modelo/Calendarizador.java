@@ -35,7 +35,7 @@ public class Calendarizador {
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
 			actualizarColaTrabajo();
 
-			// Aqui se añaden nuevos procesos a la cola de trabajo segun su tiempo de
+			// Aqui se agregan nuevos procesos a la cola de trabajo segun su tiempo de
 			// llegada
 			for (Proceso p : procesos) {
 				if (p.getLlegada() == i) {
@@ -62,7 +62,7 @@ public class Calendarizador {
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
 			actualizarColaTrabajo();
 
-			// Aqui se añaden nuevos procesos a la cola de trabajo segun su tiempo de
+			// Aqui se agregan nuevos procesos a la cola de trabajo segun su tiempo de
 			// llegada
 			for (Proceso p : procesos) {
 				if (p.getLlegada() == i) {
@@ -85,7 +85,7 @@ public class Calendarizador {
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
 			actualizarColaTrabajo();
 
-			// Aqui se añaden nuevos procesos a la cola de trabajo segun su tiempo de
+			// Aqui se agregan los nuevos procesos a la cola de trabajo segun su tiempo de
 			// llegada
 			for (Proceso p : procesos) {
 				if (p.getLlegada() == i) {
@@ -112,11 +112,11 @@ public class Calendarizador {
 		return procesosFinalizados;
 	}
 
-	// En construccion...
+	/************************** En construccion... ******************/
 	public ArrayList<Proceso> RoundRobin(ArrayList<Proceso> procesos, int quantum) {
 		// inicializarAlgoritmo(procesos);
 
-		// Se añaden todos los procesos a la cola de trabajo
+		// Se agregan todos los procesos a la cola de trabajo
 		for (Proceso p : procesos) {
 			colaTrabajo.add(p);
 		}
@@ -159,7 +159,7 @@ public class Calendarizador {
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
 			actualizarColaTrabajo();
 
-			// Aqui se añaden nuevos procesos a la cola de trabajo segun su tiempo de
+			// Aqui se agregan nuevos procesos a la cola de trabajo segun su tiempo de
 			// llegada
 			for (Proceso p : procesos) {
 				if (p.getLlegada() == i) {
