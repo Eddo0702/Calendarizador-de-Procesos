@@ -59,16 +59,14 @@ public class Controller {
 		case 3:
 			procesosOUT = calen.Prioridad(procesosIN);
 			break;
-		default:
-			System.out.println("Llamada a default");
 		}
 
 		textArea.append("Arreglo resultante de algoritmo\n\n");
 		for (Proceso p : procesosOUT) {
-			System.out.println(p.toString() + "\n");
+			//System.out.println(p.toString() + "\n");
 			textArea.append(p.toString() + "\n");
 		}
-		System.out.println();
+		//System.out.println();
 		textArea.append("\n");
 		
 		procesosIN.clear();
