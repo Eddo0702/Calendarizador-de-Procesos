@@ -32,7 +32,6 @@ public class Controller {
 	}
 
 	public void GenerarResultados(JTextArea textArea, JTable table, int algoritmo) {
-		// textArea.setText("");
 		procesosIN = new ArrayList<>();
 
 		// Obtenemos la informacion contenida en la tabla
