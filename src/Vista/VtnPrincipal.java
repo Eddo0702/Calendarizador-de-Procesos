@@ -83,15 +83,12 @@ public class VtnPrincipal extends JFrame {
 		contentPane.add(cbAlgoritmos);
 
 		String[] names = { "Nombre", "Llegada", "Rafaga", "Prioridad", "Quantum" };
-		// Object[][] data = {};
 
 		JTable table = new JTable();
 		table.setFillsViewportHeight(true);
 		DefaultTableModel model = new DefaultTableModel(0, 0);
 		model.setColumnIdentifiers(names);
 		table.setModel(model);
-
-		// model.addRow(new Object[] { "P1", "2", "3", "4" });
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 67, 275, 190);
@@ -131,8 +128,6 @@ public class VtnPrincipal extends JFrame {
 
 		textArea = new JTextArea();
 		textArea.setEditable(false);
-		// textArea.setBounds(317, 170, 367, 190);
-		// contentPane.add(textArea);
 
 		JLabel lblResultados = new JLabel("Resultados");
 		lblResultados.setFont(new Font("Tahoma", Font.BOLD, 15));

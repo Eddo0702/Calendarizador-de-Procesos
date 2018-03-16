@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Vector;
 
+import javax.swing.JTextArea;
+
 import Controlador.Controller;
 
 public class Calendarizador {
@@ -52,11 +54,7 @@ public class Calendarizador {
 	}
 
 	//SJF variante NO PREEMPTIVE (se tiene en cuenta la llegada)
-	public ArrayList<Proceso> SJF(ArrayList<Proceso> procesos) {
-		/*for (Proceso p : procesos) {
-			p.setOrderBy(1);
-		}*/
-		
+	public ArrayList<Proceso> SJF(ArrayList<Proceso> procesos) {		
 		inicializarAlgoritmo(procesos);
 
 		for (int i = arrivalTime; i < totalTime + arrivalTime; i++) {
@@ -205,5 +203,15 @@ public class Calendarizador {
 			Collections.sort(colaTrabajo);
 		}
 		colaTrabajo.elementAt(0).setEstado(true);
+	}
+	
+	public void imprimirResultados(JTextArea textArea) {
+		textArea.setText("");
+		textArea.append("Arreglo resultante de algoritmo\n\n");
+		for (Proceso p : procesosFinalizados) {
+			textArea.append(p.toString() + "\n");
+		}
+		textArea.append("\n");
+		procesosFinalizados.clear();
 	}
 }

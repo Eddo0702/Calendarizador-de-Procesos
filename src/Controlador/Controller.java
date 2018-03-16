@@ -11,11 +11,12 @@ import Modelo.Proceso;
 public class Controller {
 
 	private static Controller controller;
-	
+
+	private Calendarizador calendarizador;
 	private ArrayList<Proceso> procesosIN;
-	private ArrayList<Proceso> procesosOUT;
 
 	private Controller() {
+		calendarizador = Calendarizador.getInstance();
 	}
 
 	public static Controller getInstance() {
@@ -28,49 +29,41 @@ public class Controller {
 
 	private int castToNumber(Object object) {
 		return Integer.parseInt(object.toString());
-		//return (int) object;
 	}
 
 	public void GenerarResultados(JTextArea textArea, JTable table, int algoritmo) {
-		textArea.setText("");
+		// textArea.setText("");
 		procesosIN = new ArrayList<>();
 
+		// Obtenemos la informacion contenida en la tabla
 		for (int row = 0; row < table.getRowCount(); row++) {
-			System.out.println(table.getValueAt(row, 0) + " " + table.getValueAt(row, 1) + " "
-					+ table.getValueAt(row, 2) + " " + table.getValueAt(row, 3) + " " + table.getValueAt(row, 4));
-			//
+			/*
+			 * System.out.println(table.getValueAt(row, 0) + " " + table.getValueAt(row, 1)
+			 * + " " + table.getValueAt(row, 2) + " " + table.getValueAt(row, 3) + " " +
+			 * table.getValueAt(row, 4));
+			 */
 			procesosIN.add(new Proceso(castToNumber(table.getValueAt(row, 0)), castToNumber(table.getValueAt(row, 1)),
 					castToNumber(table.getValueAt(row, 2)), castToNumber(table.getValueAt(row, 3))));
 		}
 
-		Calendarizador calen = Calendarizador.getInstance();
-		procesosOUT = new ArrayList<>();
-
 		switch (algoritmo) {
 		case 0:
-			procesosOUT = calen.FIFO(procesosIN);
+			calendarizador.FIFO(procesosIN);
 			break;
 		case 1:
-			procesosOUT = calen.SJF(procesosIN);
+			calendarizador.SJF(procesosIN);
 			break;
 		case 2:
-			procesosOUT = calen.SRTF(procesosIN);
+			calendarizador.SRTF(procesosIN);
 			break;
 		case 3:
-			procesosOUT = calen.Prioridad(procesosIN);
+			calendarizador.Prioridad(procesosIN);
 			break;
 		}
 
-		textArea.append("Arreglo resultante de algoritmo\n\n");
-		for (Proceso p : procesosOUT) {
-			//System.out.println(p.toString() + "\n");
-			textArea.append(p.toString() + "\n");
-		}
-		//System.out.println();
-		textArea.append("\n");
-		
+		calendarizador.imprimirResultados(textArea);
+
 		procesosIN.clear();
-		procesosOUT.clear();
 	}
 
 }
